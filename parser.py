@@ -4,21 +4,21 @@ from csvsort import csvsort
 
 def load_annotations():
 	col_names = ["CID1","LID1","CID2","LID2","ST","CT","Rxx","Rxy","Rxz","Ryx","Ryy","Ryz","Rzx","Rzy","Rzz","Tx","Ty","Tz"]
-	file_name = '00000001_00500000x00000001_00500000.csv.gz'
+	file_names = os.path.join(data_folder,'00000001_00500000x00000001_00500000.csv.gz')
+	CSV_FILES = os.path.join(data_folder,"CSV_FILES")
 	dump_files = []
 	interval_value = 1000000
 	csv_ints = list(range(0,100000000,interval_value))
 	try: 
-	    os.mkdir("CSV_FILES")
+	    os.mkdir(CSV_FILES)
 	except: 
-	    for file in os.scandir("CSV_FILES"):
+	    for file in os.scandir(CSV_FILES):
 	        os.remove(file.path)
-	    os.rmdir("CSV_FILES")
-	    os.mkdir("CSV_FILES")
+	    os.rmdir(CSV_FILES)
+	    os.mkdir(CSV_FILES)
 	for x in csv_ints: 
-	    with open("CSV_FILES/" + str(x) + ".csv", "w") as my_empty_csv:
+	    with open(CSV_FILES + "/" + str(x) + ".csv", "w") as my_empty_csv:
 	        pass
-	    
 	pair_dict = {}
 	chunksize = 10 ** 6
 	smerge_counter = 0; # use merge counter to append file after file is created
@@ -30,18 +30,18 @@ def load_annotations():
 	    rev_entry = new_entry.reindex(columns=['CID2','CID1'])
 	    for x in csv_ints: 
 	        temp_df = new_entry[(new_entry["CID1"] >= x) & (new_entry["CID1"] < (x + interval_value))]
-	        temp_df.to_csv(path_or_buf="CSV_FILES/" + str(x) + ".csv", index=False, mode='a',header=False)
+	        temp_df.to_csv(path_or_buf=CSV_FILES + "/" + str(x) + ".csv", index=False, mode='a',header=False)
 	        temp_df = rev_entry[(rev_entry["CID2"] >= x) & (rev_entry["CID2"] < (x + interval_value))]
-	        temp_df.to_csv(path_or_buf="CSV_FILES/" + str(x) + ".csv", index=False, mode='a',header=False)
+	        temp_df.to_csv(path_or_buf=CSV_FILES + "/" + str(x) + ".csv", index=False, mode='a',header=False)
 
-	for file in os.scandir("CSV_FILES"):
+	for file in os.scandir(CSV_FILES):
 	    try: 
 	        csvsort(file.path,[0],has_header=False)
 	    except: 
 	        print(file.path)           
 	chunksize = 10 ** 6
 	dtypes = {'CID1': int, 'CID2': int, 'ST': int, 'CT': int}
-    for file in os.scandir("CSV_FILES"):
+    for file in os.scandir(CSV_FILES):
         try: 
             lastid = -1
             final_entry = False
