@@ -22,7 +22,7 @@ def load_annotations(data_folder):
     pair_dict = {}
     chunksize = 10 ** 6
     smerge_counter = 0; # use merge counter to append file after file is created
-    for chunk in pd.read_csv(file_name, names = col_names, usecols = ['CID1','CID2','ST','CT'], chunksize=chunksize, header = 0):
+    for chunk in pd.read_csv(file_names, names = col_names, usecols = ['CID1','CID2','ST','CT'], chunksize=chunksize, header = 0):
         new_entry = chunk.drop_duplicates()
         ## ST or CT above 95, AND ST < 101
         new_entry = new_entry[((new_entry["ST"] > 95) | (new_entry["CT"] > 95)) & (new_entry["ST"] < 101)]
