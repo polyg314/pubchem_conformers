@@ -2,7 +2,7 @@ import os
 import pandas as pd
 from .csvsort import csvsort
 
-def load_annotations():
+def load_annotations(data_folder):
     col_names = ["CID1","LID1","CID2","LID2","ST","CT","Rxx","Rxy","Rxz","Ryx","Ryy","Ryz","Rzx","Rzy","Rzz","Tx","Ty","Tz"]
     file_names = os.path.join(data_folder,'00000001_00500000x00000001_00500000.csv.gz')
     CSV_FILES = os.path.join(data_folder,"CSV_FILES")
