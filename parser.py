@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-from csvsort import csvsort
+from .csvsort import csvsort
 
 def load_annotations():
     col_names = ["CID1","LID1","CID2","LID2","ST","CT","Rxx","Rxy","Rxz","Ryx","Ryy","Ryz","Rzx","Rzy","Rzz","Tx","Ty","Tz"]
