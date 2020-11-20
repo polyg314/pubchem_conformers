@@ -1,6 +1,6 @@
 {
     "version": "0.2",
-    "requires" : ["pandas","os"],
+    "requires" : ["pandas"],
     "__metadata__": {
         "license_url": "",
         "url": ""
