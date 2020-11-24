@@ -44,8 +44,8 @@ def load_annotations(data_folder):
     dtypes = {'CID1': int, 'CID2': int, 'ST': int, 'CT': int}
     for file in os.scandir(CSV_FILES):
         try: 
-            lastid = -1
-            current_item = {}
+            # lastid = -1
+            # current_item = {}
             for chunk in pd.read_csv(file.path, names = ['CID1','CID2','ST','CT'], usecols = ['CID1','CID2'], chunksize=chunksize, header = None, dtype=dtypes):
                 for index, row in chunk.iterrows():
                     id1 = int(row['CID1'])
@@ -65,5 +65,6 @@ def load_annotations(data_folder):
                 if("_id" in current_item):
                     if(len(str(current_item["_id"])) > 0): 
                         yield(current_item)
-        except: 
-            print(file.path)
+        except:
+        	pass 
+            # print(file.path)
