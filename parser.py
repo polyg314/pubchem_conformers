@@ -45,7 +45,7 @@ def load_annotations(data_folder):
     for file in os.scandir(CSV_FILES):
         try: 
             lastid = -1
-            # current_item = {}
+            current_item = {}
             for chunk in pd.read_csv(file.path, names = ['CID1','CID2','ST','CT'], usecols = ['CID1','CID2'], chunksize=chunksize, header = None, dtype=dtypes):
                 for index, row in chunk.iterrows():
                     id1 = int(row['CID1'])
