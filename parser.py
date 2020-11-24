@@ -45,23 +45,23 @@ def load_annotations(data_folder):
     for file in os.scandir(CSV_FILES):
         try: 
             lastid = -1
-            final_entry = {}
+            current_item = {}
             for chunk in pd.read_csv(file.path, names = ['CID1','CID2','ST','CT'], usecols = ['CID1','CID2'], chunksize=chunksize, header = None, dtype=dtypes):
                 for index, row in chunk.iterrows():
                     id1 = int(row['CID1'])
                     id2 = int(row['CID2'])
                     if(id1 == lastid):
-                        final_entry["similar_conformers"].append(id2)
+                        current_item["similar_conformers"].append(id2)
                     else:
-                        if("_id" in final_entry):
-                            yield(final_entry)
+                        if("_id" in current_item):
+                            yield(current_item)
                         lastid = id1
-                        final_entry = {
+                        current_item = {
                             "_id": id1,
                             "similar_conformers": [id2]
                         }
-            if(len(final_entry["similar_conformer"]) == 1):
-            	if("_id" in final_entry):
-                	yield(final_entry)
+            if(len(current_item["similar_conformer"]) == 1):
+            	if("_id" in current_item):
+                	yield(current_item)
         except: 
             print(file.path)
