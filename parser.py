@@ -61,6 +61,7 @@ def load_annotations(data_folder):
                             "similar_conformers": [id2]
                         }
             if(len(final_entry["similar_conformer"]) == 1):
-                yield(final_entry)
+            	if("_id" in final_entry):
+                	yield(final_entry)
         except: 
             print(file.path)
