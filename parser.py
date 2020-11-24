@@ -48,8 +48,8 @@ def load_annotations(data_folder):
             current_item = {}
             for chunk in pd.read_csv(file.path, names = ['CID1','CID2','ST','CT'], usecols = ['CID1','CID2'], chunksize=chunksize, header = None, dtype=dtypes):
                 for index, row in chunk.iterrows():
-                    id1 = int(row['CID1'])
-                    id2 = int(row['CID2'])
+                    id1 = str(int(row['CID1']))
+                    id2 = str(int(row['CID2']))
                     if(id1 == lastid):
                         current_item["similar_conformers"].append(id2)
                     else:
