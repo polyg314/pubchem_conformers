@@ -54,7 +54,8 @@ def load_annotations(data_folder):
                         current_item["similar_conformers"].append(id2)
                     else:
                         if("_id" in current_item):
-                            yield(current_item)
+                        	if(len(str(current_item["_id"])) > 0): 
+                            	yield(current_item)
                         lastid = id1
                         current_item = {
                             "_id": id1,
@@ -62,6 +63,7 @@ def load_annotations(data_folder):
                         }
             if(len(current_item["similar_conformer"]) == 1):
             	if("_id" in current_item):
-                	yield(current_item)
+            		if(len(str(current_item["_id"])) > 0): 
+                		yield(current_item)
         except: 
             print(file.path)
