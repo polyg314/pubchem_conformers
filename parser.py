@@ -7,7 +7,7 @@ from os.path import isfile, join
 def load_annotations(data_folder):
     col_names = ["CID1","LID1","CID2","LID2","ST","CT","Rxx","Rxy","Rxz","Ryx","Ryy","Ryz","Rzx","Rzy","Rzz","Tx","Ty","Tz"]
     # file_names = os.path.join(data_folder,'00000001_00500000x00000001_00500000.csv.gz')
-    file_names = [f for f in listdir(data_folder) if isfile(join(data_folder, f))]
+    file_names = [os.path.join(data_folder,f) for f in listdir(data_folder) if isfile(join(data_folder, f))]
     CSV_FILES = os.path.join(data_folder,"CSV_FILES")
     interval_value = 1000000
     csv_ints = list(range(0,100000000,interval_value))
