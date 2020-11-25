@@ -28,7 +28,7 @@ def load_annotations(data_folder):
 	    for chunk in pd.read_csv(file_name, names = col_names, usecols = ['CID1','CID2','ST','CT'], chunksize=chunksize, header = 0):
 	        new_entry = chunk.drop_duplicates()
 	        ## ST or CT above 95, AND ST < 101
-	        new_entry = new_entry[((new_entry["ST"] > 95) | (new_entry["CT"] > 95)) & (new_entry["ST"] < 101)]
+	        new_entry = new_entry[((new_entry["ST"] > 96) | (new_entry["CT"] > 96)) & (new_entry["ST"] < 100)]
 	        new_entry.drop(["ST","CT"], axis=1)
 	        rev_entry = new_entry.reindex(columns=['CID2','CID1'])
 	        for x in csv_ints: 
